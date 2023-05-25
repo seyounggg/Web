@@ -114,9 +114,121 @@ public class BoardDAO {
 		}
 		return total;
 	}
-	//5-2. 상세보기 => 조회수 증가(UPDATE), 상세볼 게시물 읽기(SELECT)
+	//5-2. 상세보기 => 조회수 증가(UPDATE), 상세볼 게시물 읽기(SELECT) // public boardbvo -> 게시물 1개만 보여주겠다
+	public BoardVO boardDetailData(int no) {
+		BoardVO vo=new BoardVO();
+		try {
+			getConnection();
+			String sql="UPDATE freeboard SET "
+					+ "hit=hit+1 "
+					+ "WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql="SELECT no,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd'),hit "
+					+ "FROM freeboard "
+					+ "WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			vo.setDbday(rs.getString(5));
+			vo.setHit(rs.getInt(6));
+			rs.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			disConnection();
+		}
+		return vo;
+	}
 	//5-3. 게시물 등록 => INSERT
+	// 용도 (SQL문장 사용법, HTML 태그 => 웹사이트)
+	public void boardInsert(BoardVO vo) {
+		try {
+			getConnection();
+			String sql="INSERT INTO freeboard(no,name,subject,content,pwd) "
+					+ "VALUES(fb_no_seq.nextval,?,?,?,?)";
+			ps=conn.prepareStatement(sql);
+			// 실행 요청 전에 ? 에 값을 채운다
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getSubject());
+			ps.setString(3, vo.getContent());
+			ps.setString(4, vo.getPwd());
+			
+			// 실행
+			ps.executeUpdate();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			disConnection();
+		}
+	}
 	//5-4. 수정(UPDATE) => 먼저 입력한 게시물 읽기, 실제 수정(비밀번호 검색)
+	public boolean boardUpdate(int no, String pwd) {
+		boolean bCheck=false;
+		try {
+			getConnection();
+			String sql="SELECT pwd FROM freeboard "
+					+ "WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			String db_pwd=rs.getString(1);
+			rs.close();
+			
+			if(db_pwd.equals(pwd)) {
+				bCheck=true;
+				// 수정
+				sql="UPDATE freeboard SET "
+						+ "name=?,subject=?,content=?"
+						+ "WHERE no="+no;
+				ps=conn.prepareStatement(sql);
+				BoardVO vo=new BoardVO();
+				ps.setString(1, vo.getName());
+				ps.setString(2, vo.getSubject());
+				ps.setString(3, vo.getContent());
+				//실행
+				ps.executeUpdate();
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			disConnection();
+		}
+		return bCheck;
+	}
+	
 	//5-5. 삭제(DELETE) => 비밀번호 검색
+	public boolean boardDelete(int no, String pwd) {
+		boolean bCheck=false; // 비밀번호(본인여부)가 맞으면 삭제, 아니면 삭제못함
+		try {
+			getConnection();
+			String sql="SELECT pwd FROM freeboard "
+					+ "WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			String db_pwd=rs.getString(1);
+			rs.close();
+			
+			if(db_pwd.equals(pwd)) {
+				bCheck=true;
+				// 삭제
+				sql="DELETE FROM freeboard "
+						+ "WHERE no="+no;
+				ps=conn.prepareStatement(sql);
+				ps.executeUpdate();
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			disConnection();
+		}
+		return bCheck;
+	}
 	//5-6. 검색(이름, 제목, 내용) => LIKE
 }
