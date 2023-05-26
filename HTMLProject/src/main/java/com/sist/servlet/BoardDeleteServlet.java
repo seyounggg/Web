@@ -19,10 +19,9 @@ public class BoardDeleteServlet extends HttpServlet {
 		// 전송방식 -> HTML
 		response.setContentType("text/html;charset=UTF-8");
 		// 클라이언트가 전송한 값을 받는다
-		// BoardDeleteServlet?no=
 		String no=request.getParameter("no");
-		PrintWriter out=response.getWriter();
 		// out.print -> 소스코드를 한줄로 / out.println : 소스코드를 한칸씩 띄우는거(수정에 용이) // 화면출력에는 문제 없음
+		PrintWriter out=response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<link rel=stylesheet href=html/table.css>");
