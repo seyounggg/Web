@@ -143,7 +143,7 @@ public class DataCollection {
 					dao.foodDataInsert(fvo);
 				}
 			}
-			System.out.println("저장 완료!!");
+			System.out.println("저장 완료!!!");
 		}catch(Exception ex) {}
 	}
 	public static void main(String[] args) {
