@@ -107,7 +107,7 @@ public class DataCollection {
 						}else if(ss.equals("전화번호")) {
 							Element e=doc2.select("table.info tr td").get(a);
 							phone=e.text();
-						}else if(ss.equals("음식 정류")) {
+						}else if(ss.equals("음식 종류")) {
 							Element e=doc2.select("table.info tr td").get(a);
 							type=e.text();
 						}else if(ss.equals("가격대")) {
