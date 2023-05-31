@@ -26,7 +26,7 @@ public class FoodDetailServlet extends HttpServlet {
 		FoodVO vo=dao.foodDetailData(Integer.parseInt(fno));
 		String addr=vo.getAddress();
 		String addr1=addr.substring(0,addr.lastIndexOf("지번"));
-		String addr2=addr.substring(addr.lastIndexOf("지")+3);
+		String addr2=addr.substring(addr.lastIndexOf("지번")+3);
 		PrintWriter out=response.getWriter();
 		// HTML을 출력 => 오라클에서 받은 결과값 출력 
 				out.println("<html>");
@@ -63,7 +63,7 @@ public class FoodDetailServlet extends HttpServlet {
 				out.println("<table class=table>");
 				out.println("<tr>");
 				out.println("<td>");
-				out.println("<h3>"+vo.getName()+"&nbsp;<span style=\"color:orange\">"+vo.getScore()+"</span></h3>");
+				out.println("<h3>"+vo.getName()+"&nbsp;<span style=\"color:orange\""+vo.getScore()+">"+vo.getScore()+"</span></h3>");
 				out.println("</td>");
 				out.println("</tr>");
 				out.println("</table>");
@@ -94,7 +94,7 @@ public class FoodDetailServlet extends HttpServlet {
 				out.println("<td width=80%>"+vo.getTime()+"</td>");
 				out.println("</tr>");
 				out.println("<tr>");
-				if(vo.getMenu().equals("no")) {
+				if(!vo.getMenu().equals("no")) {
 					out.println("<th width=20%>메뉴</th>");
 					out.println("<td width=80%>");
 					st=new StringTokenizer(vo.getMenu(),"원");
@@ -108,15 +108,12 @@ public class FoodDetailServlet extends HttpServlet {
 					out.println("</td>");
 					out.println("</tr>");
 				}
-//				out.println("<th width=20%>메뉴</th>");
-//				out.println("<td width=80%>"+vo.getMenu()+"</td>");
 				out.println("<tr>");
-				out.println("<td>");
 				out.println("<td class=text-right colspan=2>");
 				out.println("<a href=# class=\"btn btn-xs btn-danger\">예약하기</a>");
 				out.println("<a href=# class=\"btn btn-xs btn-success\">찜하기</a>");
 				out.println("<a href=# class=\"btn btn-xs btn-warning\">좋아요</a>");
-				out.println("<a href=\"FoodListServlet?cno="+vo.getCno()+" class=\"btn btn-xs btn-info\">목록</a>");
+				out.println("<a href=\"FoodListServlet?cno="+vo.getCno()+"\" class=\"btn btn-xs btn-info\">목록</a>");
 				out.println("</td>");
 				out.println("</tr>");
 				out.println("</table>");
