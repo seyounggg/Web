@@ -36,7 +36,9 @@ public class FoodCategoryServlet extends HttpServlet {
 		out.println("<body>");
 		out.println("<div class=container>");
 		out.println("<h1>믿고보는 맛집 리스트</h1>");
-		out.println("<div class=row>");
+		out.println("<div class=row>"); 
+		
+		
 		for(int i=0;i<12;i++)
 		{
 			CategoryVO vo=list.get(i);

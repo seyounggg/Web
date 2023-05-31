@@ -234,6 +234,7 @@ public class FoodDAO {
 			
 			// 결과값 읽기
 			ResultSet rs=ps.executeQuery();
+			
 			while(rs.next()) {
 				FoodVO vo=new FoodVO();
 				vo.setFno(rs.getInt(1));
@@ -242,9 +243,10 @@ public class FoodDAO {
 				poster=poster.substring(0,poster.indexOf("^"));
 				poster=poster.replace("#", "&");
 				vo.setPoster(poster);
-				vo.setScore(rs.getDouble(end));
-				rs.close();
+				vo.setScore(rs.getDouble(4));
+				list.add(vo);
 			}
+			rs.close();
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

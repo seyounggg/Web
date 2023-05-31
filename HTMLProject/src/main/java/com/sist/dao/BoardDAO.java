@@ -215,7 +215,7 @@ public class BoardDAO {
 			if(db_pwd.equals(vo.getPwd()))
 			{
 				bCheck=true;
-				// 삭제 
+				// 수정
 				sql="UPDATE freeboard SET "
 				   +"name=?,subject=?,content=? "
 				   +"WHERE no=?";
@@ -253,7 +253,7 @@ public class BoardDAO {
 			
 			if(db_pwd.equals(pwd)) {
 				bCheck=true;
-				// 삭제
+				// 수정
 				sql="DELETE FROM freeboard "
 						+ "WHERE no="+no;
 				ps=conn.prepareStatement(sql);
