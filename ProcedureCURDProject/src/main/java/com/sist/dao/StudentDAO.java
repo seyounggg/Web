@@ -11,7 +11,7 @@ public class StudentDAO {
 	// 함수 (프로시져) 호출
 	private CallableStatement cs;
 	// URL
-	private final String URL="jdbc:oracle:thin:@localhost:1521:xe";
+	private final String URL="jdbc:oracle:thin:@211.238.142.122:1521:xe";
 	// Singleton
 	private static StudentDAO dao;
 	
