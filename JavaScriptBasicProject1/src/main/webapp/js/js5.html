@@ -1,0 +1,179 @@
+<!-- 
+	제어문
+	1) 조건문
+		단일 조건문
+			형식)
+				if(조건문 / 연산자 : 부정, 비교, 논리연산자) {
+					조건이 true 시 처리
+				}
+				=> if(1 => true라면)
+				=> if(0 => false라면) => 산술처리를 하고 결과값으로 true/false처리가 가능
+		선택 조건문
+			형식)
+				if(조건문) {
+					조건이 true 시 처리
+				}else {
+					조건이 false 시 처리
+				}
+		다중 조건문
+			형식)
+				if(조건문){
+					조건이 true 시 처리 및 종료
+					조건이 false면 else if로 이동
+				} else if {
+					조건이 true면 처리 및 종료
+					조건이 false면 아래 else if로 이동
+				} else {
+					해당 조건이 없는 경우 처리
+					=> else{} 는 생략이 가능
+				}
+				한개 문장으로 제작 => 해당 조건 1개만 수행
+	2) 선택문
+		switch ~ case (숫자/문자)
+		형식)
+			switch(숫자,문자) {
+				case 값 :
+					처리
+					break;
+				case 값 :
+					처리
+					break;
+				case 값 :
+					처리
+					break;
+			}
+	3) 반복문
+		while => 반복횟수가 없는 경우
+			형식)
+				초기값  ------------1
+				while(조건식){  ----2 (=> false면 종료)
+					반복수행문   ----3
+					증감식      ----4
+				}
+				1-2-3-4-2-3-4-2-3-4-2(false면)종료
+		for => 반복횟수가 있는 경우
+			형식)
+					  1 →  2  ← 4
+				for(초기식;조건식;증가식) {
+						   ↓ true
+					반복문장 3 → 증가식
+				}
+		for-each
+			형식)
+				for(변수 of 배열)
+					=> 배열에 있는 값을 변수에 1개씩 적용
+				for(변수 in 배열)
+					=> 배열의 인덱스번호를 읽어 온다 => 배열 여러개를 동시에 출력
+				배열.forEach(function(변수){
+									----- 자동으로 배열의 값을 1개씩 읽어온다
+				})
+				ES6 (=> VueJS/ReactJS)
+				배열.forEach((변수)=>{
+					
+				})
+				-- map함수
+				배열.map(function(변수){
+									----- 자동으로 배열의 값을 1개씩 읽어온다
+				})
+				
+				ES6 (=> VueJS/ReactJS)
+				배열.map((변수)=>{
+					
+				})
+	4) 반복제어문
+		break : 반복문을 종료할 때 사용
+	
+	태그를 제어(구분자 => name, id, class) : 태그를 찾을 때 CSS의 selector를 이용
+	1. 태그에 id 속성이 있는 경우
+		모든 채그를 관리 => document
+		형식)
+			document.getElementById("id명") => $('#아이디명')
+											=> $refs.아이디명
+	2. 태그에 class 속성이 있는 경우
+		형식)
+			document.getElementByClassName("클래스명")
+	3. 태그에 name 속성이 있는 경우
+		형식)
+			document.getElementByName("name명")
+	4. 태그명을 읽는 경우
+		형식)
+			document.getElementByTagName("태그명")
+	5. CSS의 selector를 이용하는 경우
+	(★★★)형식)
+			document.querySelector(css)
+			▷ 아이디명 => #아이디명
+			▷ 클래스명 => .클래스명
+			▷ 태그명 => 태그명
+ -->
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript">
+/* window.onload=function(){
+	let a=10;
+	if(a%2===0){
+		console.log(a+"는(은) 짝수입니다")
+	} else{
+		console.log(a+"는(은) 홀수입니다")
+	}
+} */
+
+//if문 => 유효성 검사
+function login(){ //login()을 onclick하면 기능을 수행하라
+	let id=document.getElementById("id").value;
+	if(id===""){ //id값이 입력이 안됐다면
+		//alert("ID를 입력하세요")
+		document.getElementById("id").focus()
+		document.getElementById("result").innerHTML="아이디를 입력하세요"
+		//                                --------- 태그와 태그 사이에 값을 넣는다(<span></span>)
+	}
+}
+</script>
+<style type="text/css">
+.container{
+	margin-top : 50px;
+}
+.row{
+	margin: 0px auto;
+	width: 350px;
+}
+h1{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>IF(조건문 연습:단일조건문)</h1>
+		<div class="row">
+			<table class="table">
+				<tr>
+					<th width=35% class="text-center">ID</th>
+					<td width=65%>
+						<input type=text id=id size=15 class="input-sm">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span id="result" style="color:red"></span>
+					</td>
+				</tr>
+				<tr>
+					<th width=35% class="text-center">Password</th>
+					<td width=65%>
+						<input type=password id=pwd size=15 class="input-sm">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="text-center">
+						<input type=button class="btn btn-sm btn-primary" value="로그인" onclick="login()">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
