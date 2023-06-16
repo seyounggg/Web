@@ -1,0 +1,109 @@
+<!-- 316page 함수 -->
+<!-- 
+	함수 : 기능처리 / 반복수행 (=> 자바의 메소드)
+	
+	익명 / 선언 차이 => 함수명의 존재 여부
+	익명의 함수
+		function(){}
+	선언적 함수
+		function 함수명(){}
+	
+	함수 구성요소
+		선언부 => 함수명 / 매개변수 => 리턴형이 없다(리턴은 가능)
+		구현부 => {
+					지역변수
+					연산처리
+					제어문
+				}
+	함수 기본
+		리턴형(결과값)=한개  	매개변수=여러개
+		------------------------------------
+	1)			O				O
+		------------------------------------
+	2)			O				X
+		------------------------------------
+	3)			X				O
+		------------------------------------
+	4)			X				X
+		------------------------------------
+		※ 리턴값의 데이터형을 작성하지 않는다 (자바와 차이점)
+	!! 선언적 함수
+	------------------------------------------------------------------------
+		1)유형
+			function func_name(id) {  => 매개변수는 변수명만!(let..안씀)
+				처리 ...
+				return 값
+			}
+		2)유형
+			function func_name() {
+				처리 ...
+				return 값
+			}
+		3)유형
+			function func_name(매개변수) {
+				처리...
+				return; // 함수의 종료 시점을 의미(return형이 없을 경우 생략이 가능하다)
+			}
+		4)유형
+			function func_name() {
+				처리...
+			}
+	-------------------------------------------------------------------------
+	!! 익명의 함수 => 변수선언으로 받는다
+	let 함수명=function(){} (구방식)
+	let 함수명=()=>{}
+		'=>' function/return
+		
+		function calc(x,y,z){
+			return x+y+z
+		}
+					↓
+		let calc=function(x,y,z) {
+			return x+y+z
+		}
+					↓
+		let calc=(x,y,z)=>x+y+z
+	
+	=> 호이스팅 / 클로저 => vue,react=>class형 (prototype, get set)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 익명의 함수
+window.onload=function(){
+	let a=10
+	let b=20
+	let c=add1(a,b)
+	let d=add2(a,b)
+	let e=add3(a,b)
+	let f=add4(a,b)
+
+	document.write("c="+c+","+typeof add1+"<br>")
+	document.write("d="+d+","+typeof add2+"<br>")
+	document.write("e="+e+","+typeof add3+"<br>")
+	document.write("f="+f+","+typeof add4+"<br>")
+}
+// 선언적 함수
+function add1(a,b){
+	return a+b;
+}
+function add1(a,b){
+	return (a+b)+"값";
+}
+// 익명의 함수
+let add2=function(a,b){
+	return a+b;
+}
+// 화살표 함수
+let add3=(a,b)=>a+b
+let add4=(a,b)=>{return a+b}
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
