@@ -1,0 +1,42 @@
+<!-- 345page 
+	문서객체조작 (codepen.io <- 이런곳에서 많이 사용된다)
+	1) 글자조작
+		innerHTMl => HTML이 적용 => Jquery => html()
+		textContent => 순수하게 문자열 => text()
+	2) 스타일 조작
+		태그.style.속성=값
+		- 대신에 => 대문자 처리
+		예) 349page
+			background-color (X) => backgroundColor (O)
+			=> jquery,vue,react 에서 적용되는 내용
+	
+	3) 속성 조작 (메뉴) -> js3.html파일!
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=()=>{
+	//document.body.innerHTML="<h1>Hello JavaScript</h1>" -> h1태그 적용
+	/* document.body.textContent="<h1>Hello JavaScript</h1>"
+	// 문자열로 인식/그대로 출력 => <h1>Hello JavaScript</h1> */
+	let div=document.querySelectorAll("div")
+	for(let d of div){
+		d.style.width="100px" // <div style="width:100px heigh:100px border:1px solid red margin-top:5px">
+		d.style.height="100px"
+		d.style.border="1px solid red"
+		d.style.marginTop="5px"
+	}
+}
+</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>
