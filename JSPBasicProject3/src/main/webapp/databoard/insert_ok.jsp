@@ -30,7 +30,8 @@
 	vo.setContent(content);
 	vo.setPwd(pwd);
 	
-	String filename=mr.getOriginalFileName("upload");
+	//String filename=mr.getOriginalFileName("upload"); // 실제 파일명이 아니라 사용자가 붙여준 이름(OriginalFileName)
+	String filename=mr.getFilesystemName("upload"); // 중복파일이 있는 경우 파일명 뒤에 1,2,3숫자가 붙는데 filesystemname을 이용하면 1,2,3이 붙여진 실제 파일명이 사용된다
 	if(filename==null){ //upload가 안된상태
 		vo.setFilename("");
 		vo.setFilesize(0);
