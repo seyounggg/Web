@@ -93,7 +93,7 @@ $(function(){
         <table class="table">
           <tr>
             <th width=20% class="text-center danger">번호</th>
-            <td width=30% class="text-center"><%=vo.getNo() %></td>
+            <td width=30% class="text-center"><%=vo.getNo()  %></td>
             <th width=20% class="text-center danger">작성일</th>
             <td width=30% class="text-center"><%=vo.getDbday() %></td>
           </tr>
