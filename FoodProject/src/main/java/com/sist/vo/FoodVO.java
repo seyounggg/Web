@@ -16,6 +16,7 @@ package com.sist.vo;
  BAD     NUMBER
  POSTER  NOT NULL VARCHAR2(4000)
  */
+
 public class FoodVO {
 	private int fno,cno,good,soso,bad;
 	private double score;
