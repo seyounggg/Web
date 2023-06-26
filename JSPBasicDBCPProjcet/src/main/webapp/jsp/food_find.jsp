@@ -11,7 +11,7 @@
 	//2. 실행과 동시에 페이지 전송이 불가능하다 => 첫페이지는 default 속성(1)
 	if(strPage==null)
 		strPage="1";
-	//3. 현재페이지 지정
+	//3. 현재페이지 지정 
 	int curpage=Integer.parseInt(strPage);
 	//4. 현재페이지에 대한 데이터 읽기(DAO=>오라클)
 	FoodDAO dao=FoodDAO.newInstance();
