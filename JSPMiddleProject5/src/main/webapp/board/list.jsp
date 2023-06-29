@@ -26,6 +26,7 @@
 	request.setAttribute("count", count);
 	
 	request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+	request.setAttribute("msg", "관리자가 삭제한 게시물입니다");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +57,7 @@
       <table class="table">
         <tr>
           <td>
-            <a href="#" class="btn btn-sm btn-danger">새글</a>
+            <a href="insert.jsp" class="btn btn-sm btn-danger">새글</a>
           </td>
         </tr>
       </table>
@@ -80,8 +81,16 @@
                 </c:forEach>
                 <img src="image/re_icon.png">&nbsp;
               </c:if>
-              ${vo.subject } &nbsp;
+            <c:if test="${msg!=vo.subject }">
+            <a href="detail.jsp?no=${vo.no }"> ${vo.subject }</a>
+            </c:if>
+            <c:if test="${msg==vo.subject }">
+            <span style="color: gray">${vo.subject }</span>
+            </c:if>
+            &nbsp;
+            <c:if test="${today==vo.dbday }">
               <sup><img src="image/new.gif"></sup>
+            </c:if>
             </td>
             <td width=15% class="text-center">${vo.name }</td>
             <td width=20% class="text-center">${vo.dbday }</td>
@@ -93,6 +102,7 @@
       <table class="table">
         <tr>
           <td class="text-left">
+          <form method="post" action="find.jsp">
             Search : <select name=fs class="input-sm">
               <option value="name">이름</option>
               <option value="subject">제목</option>
@@ -100,6 +110,7 @@
             </select>
             <input type=text name=ss size=15 class="input-sm">
             <button class="btn btn-sm btn-info">검색</button>
+          </form>
           </td>
           <td class="text-right">
             <a href="list.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-primary">이전</a>
