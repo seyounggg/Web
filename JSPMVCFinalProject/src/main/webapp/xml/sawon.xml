@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 무조건 맨 윗출에 있어야 한다(이 위로 주석처리도 하면 안됨) -->
+<!DOCTYPE sawon SYSTEM "sawon.dtd">
+<sawon>
+  <list>
+    <name>홍길동</name>
+    <sex>남</sex>
+    <phone>1111-1111</phone>
+  </list>
+  <list>
+    <name>홍길동</name>
+    <sex>여</sex>
+    <tel>1111-1111</tel>
+  </list>
+</sawon>
