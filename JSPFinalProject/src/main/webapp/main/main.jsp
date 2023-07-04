@@ -10,7 +10,7 @@
 </head>
 <body id="top">
 <jsp:include page="header.jsp"></jsp:include>
-<jsp:include page="${main_jsp}"></jsp:include>
+<jsp:include page="${main_jsp}"></jsp:include> <!-- main_jsp => 변수명 -->
 <jsp:include page="footer.jsp"></jsp:include>
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a> 
 <!-- JAVASCRIPTS --> 
