@@ -44,6 +44,7 @@ public class FoodModel {
 		request.setAttribute("list", list);
 		request.setAttribute("fd", fd);
 		request.setAttribute("main_jsp", "../food/location_find.jsp");
+		CommonModel.commonRequestData(request);
 		return"../main/main.jsp";
 	}
 	/*
@@ -119,6 +120,7 @@ public class FoodModel {
 		// include 시에는 include된 모든 jsp에서 request값을 사용할 수 있다(request공유)
 		// 예) include로 3개를 하나로 합쳐놨으니까 request를 공유할 수 있다
 		request.setAttribute("main_jsp", "../food/food_category_list.jsp");
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 	
@@ -139,7 +141,6 @@ public class FoodModel {
 	/*
 		회원가입 / 로그인 => main.do
 		예약 / 장바구니 / 결제 => mypage.do
-		
 	 */
 	@RequestMapping("food/food_detail.do")
 	public String food_detail(HttpServletRequest request,HttpServletResponse response) {
@@ -157,6 +158,7 @@ public class FoodModel {
 		request.setAttribute("addr2", addr2.trim());
 		// 인근 명소 또는 레시피
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 }

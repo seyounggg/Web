@@ -17,10 +17,12 @@ public class MemberModel {
 	@RequestMapping("member/join.do")
 	public String memberJoin(HttpServletRequest request,HttpServletResponse response) {
 		request.setAttribute("main_jsp","../member/join.jsp"); //Home화면을 변경
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp"; //화면출력
 	}
 	@RequestMapping("member/idcheck.do")
 	public String memberJoinIdCheck(HttpServletRequest request,HttpServletResponse response) {
+		
 		return "../member/idcheck.jsp"; //화면출력
 	}
 	
@@ -135,7 +137,7 @@ public class MemberModel {
 	public String memberLogout(HttpServletRequest request,HttpServletResponse response) {
 		HttpSession session=request.getSession();
 		session.invalidate();
-		
+			
 		return "redirect:../main/main.do";
 	}
 }

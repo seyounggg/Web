@@ -76,6 +76,14 @@
               </td>
           	</tr>
           </c:if>
+          <tr>
+            <td colspan=2 class="text-right">
+              <a href="#" class="btn btn-xs btn-info">찜하기</a>
+              <a href="#" class="btn btn-xs btn-danger">좋아요(0)</a>
+              <a href="#" class="btn btn-xs btn-warning">예약</a>
+              <a href="../food/food_category_list.do?cno=${vo.cno }" class="btn btn-xs btn-success">목록</a>
+            </td>
+          </tr>
         </table>
       </div>
       <div class="col-sm-4"> <!-- 지도/인근명소 -->

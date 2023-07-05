@@ -33,12 +33,14 @@ public class FreeBoardModel {
 		request.setAttribute("main_jsp", "../board/list.jsp");
 		// main_jsp => 화면출력부분 // request는 main.jsp로 보내고 -> board.list.jsp와 공유한다
 		//main이 받는 모든 request를 공유한다!!
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 	// 데이터 추가
 	@RequestMapping("board/insert.do")
 	public String board_insert(HttpServletRequest request,HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../board/insert.jsp");
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 	
@@ -71,6 +73,7 @@ public class FreeBoardModel {
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../board/detail.jsp");
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 	
@@ -98,6 +101,7 @@ public class FreeBoardModel {
 		// request를 통해 값을 보낸다
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../board/update.jsp");
+		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
 	
