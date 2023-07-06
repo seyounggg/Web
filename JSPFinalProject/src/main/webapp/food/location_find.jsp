@@ -42,8 +42,7 @@ $(function(){
            <c:forEach var="vo" items="${list }" varStatus="s">
               <li class="one_quarter ${s.index%4==0?'first':'' }"><a href="#"><img src="${vo.poster }" alt="${vo.name }"></a></li>
            </c:forEach> 
-           
-            
+         </ul>
         </figure>
       </div>
       <!--  class=current -->

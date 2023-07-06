@@ -159,6 +159,11 @@ public class FoodModel {
 		// 인근 명소 또는 레시피
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
 		CommonModel.commonRequestData(request);
+		
+		// 댓글읽기
+		ReplyDAO rdao=ReplyDAO.newInstance();
+		List<ReplyVO> rlist=rdao.replyListData(1, Integer.parseInt(fno));
+		request.setAttribute("rlist", rlist);
 		return "../main/main.jsp";
 	}
 }

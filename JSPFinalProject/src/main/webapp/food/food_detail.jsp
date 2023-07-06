@@ -67,10 +67,10 @@
           <c:if test="${vo.menu!='no' }">
             <tr>
               <th width=20% class="text-center">메뉴</th>
-              <td width=80%>${vo.menu }
+              <td width=80%>
                 <ul>
                   <c:forTokens items="${vo.menu }" delims="원" var="m">
-                    <li>${m }</li>
+                    <li>${m }원</li>
                   </c:forTokens>
                 </ul>
               </td>
@@ -85,6 +85,49 @@
             </td>
           </tr>
         </table>
+        <div style="heigth: 20px"></div>
+        <h3>댓글</h3>
+        <hr>
+        <table class="table">
+          <tr>
+            <td>
+              <c:forEach var="rvo" items="${rlist }">
+                <table class="table">
+                  <tr>
+                    <td class="text-left">
+                    ◑${rvo.name }&nbsp;(${rvo.dbday })
+                    </td>
+                    <td class="text-right">
+                      <c:if test="${sessionScope.id==rvo.id }"> <!-- 본인이 쓴거면 버튼이 보인다 -->
+                        <a href="#" class="btn btn-xs btn-danger">수정</a>
+                        <a href="#" class="btn btn-xs btn-primary">삭제</a>
+                      </c:if>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" valign="top" class="text-left">
+                      <pre style="white-space: pre-wrap;background-color: white;border: none">${rvo.msg }</pre>
+                    </td>
+                  </tr>
+                </table>
+              </c:forEach>
+            </td>
+          </tr>
+        </table>
+        <c:if test="${sessionScope.id!=null }">
+        <table class="table">
+          <tr>
+            <td>
+              <form method=post action="../reply/reply_insert.do">
+              <input type=hidden name="cno" value="${vo.fno }">
+              <input type=hidden name="type" value="1">
+              <textarea rows="5" cols="60" name="msg" style="float: left"></textarea>
+              <input type=submit value="댓글쓰기" style="width: 120px;height: 104px;background-color: green;color: white">
+              </form>
+            </td>
+          </tr>
+        </table>
+        </c:if>
       </div>
       <div class="col-sm-4"> <!-- 지도/인근명소 -->
         <div id="map" style="width:100%;height:350px;"></div>

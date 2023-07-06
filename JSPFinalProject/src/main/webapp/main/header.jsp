@@ -41,7 +41,10 @@ $(function(){
 					$('#pwd').val("")
 					$('#pwd').focus()
 				} else {
-					location.href="../main/main.do"
+					// Store the current URL in session storage
+					sessionStorage.setItem('previousUrl', window.location.href);
+					//location.href="../main/main.do"
+					location.reload();
 				}
 			}
 		})
@@ -125,9 +128,9 @@ $(function(){
       </li>
       <li><a class="drop" href="#">서울여행</a>
         <ul>
-          <li><a href="pages/gallery.html">명소</a></li>
-          <li><a href="pages/full-width.html">자연&관광</a></li>
-          <li><a href="pages/sidebar-left.html">쇼핑</a></li>
+          <li><a href="../seoul/seoul_list.do">명소</a></li>
+          <li><a href="../seoul/seoul_list.do?type=2">자연&관광</a></li>
+          <li><a href="../seoul/seoul_list.do?type=3">쇼핑</a></li>
           <c:if test="${sessionScope.id != null }">
           <li><a href="pages/sidebar-left.html">코스</a></li>
           </c:if>
