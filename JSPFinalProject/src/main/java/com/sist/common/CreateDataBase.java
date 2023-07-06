@@ -24,4 +24,13 @@ public class CreateDataBase {
 			e.printStackTrace();
 		}
 	}
+	public void disConnection(Connection conn,CallableStatement ps) {
+							//				  ----------------- 프로시져 호출할때 사용
+		try {
+			if(conn!=null) conn.close();
+			if(ps!=null) ps.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
