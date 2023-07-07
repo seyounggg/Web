@@ -133,7 +133,7 @@ public class FoodDAO {
 		List<FoodVO> list=new ArrayList<FoodVO>();
 		try {
 			conn=db.getConnection();
-			String sql="SELECT fno,cno,poster,name,score,address "
+			String sql="SELECT fno,cno,poster,name,score,address,NVL(foodReplyData(fno),'') as msg,NVL(foodReplyName(fno),'') as rname "
 					+ "FROM food_house "
 					+ "WHERE cno=?";
 			ps=conn.prepareStatement(sql);
@@ -152,6 +152,8 @@ public class FoodDAO {
 				String addr=rs.getString("address");
 				addr=addr.substring(0,addr.indexOf("지번"));
 				vo.setAddress(addr);
+				vo.setMsg(rs.getString("msg"));
+				vo.setRname(rs.getString("rname"));
 				list.add(vo);
 			}
 			rs.close();
