@@ -73,6 +73,12 @@ public class FreeBoardModel {
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../board/detail.jsp");
+		
+		// no(게시글번호)에 맞는 댓글 읽어오기
+		FreeBoardReplyDAO fdao=FreeBoardReplyDAO.newInstance();
+		List<FreeBoardReplyVO> list=fdao.replyListData(Integer.parseInt(no));
+		request.setAttribute("list", list);
+		
 		CommonModel.commonRequestData(request);
 		return "../main/main.jsp";
 	}
@@ -123,4 +129,5 @@ public class FreeBoardModel {
 		request.setAttribute("no", vo.getNo());
 		return "../board/update_ok.jsp";
 	}
+	
 }
