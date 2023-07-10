@@ -1,6 +1,9 @@
 package com.sist.controller;
 
 import java.io.*;
+import java.lang.reflect.Method;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,16 +51,46 @@ import javax.servlet.http.HttpServletResponse;
 	MV구조 : JSP => Java => JSP
 	Model2방식 : JSP => Servlet => Java => Servlet => Java (유지보수/대규모)
  */
+import java.util.*;
+import com.sist.model.*;
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private List<String> clsList=new ArrayList<String>();
 	public void init(ServletConfig config) throws ServletException {
-		
+		clsList.add("com.sist.model.DiaryModel");
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// 1. 사용자가 보내준 uri 주소를 읽어온다
+		String cmd=request.getRequestURI();
+		// http://localhost/JSPAjaxProject3/diary3/diary.do
+		//                  ------------------------------- URI
+		System.out.println("cmd="+cmd);
+		cmd=cmd.substring(request.getContextPath().length()+1);
+		System.out.println("cmd="+cmd);
+		try {
+			// 메소드를 찾아서 호출
+			for(String cls:clsList) {
+				Class clsName=Class.forName(cls);
+				// 클래스 정보를 읽어온다
+				Object obj=clsName.getDeclaredConstructor().newInstance();
+				// 클래스 메모리 할당
+				Method[] methods=clsName.getDeclaredMethods();
+				// 메소드 전체를 읽어온다
+				// 메소드 위에 있는 어노테이션 읽기
+				for(Method m:methods) {
+					RequestMapping rm=m.getAnnotation(RequestMapping.class);
+					if(rm.value().equals(cmd)) {
+						// 조건에 맞는 메소드를 호출
+						String jsp=(String)m.invoke(obj, request, response);
+						// request를 보내주고 결과값을 담아서 들어온다
+						RequestDispatcher rd=request.getRequestDispatcher(jsp);
+						rd.forward(request, response);
+					}
+				}
+			}
+		}catch(Exception e) {}
 	}
 
 }
