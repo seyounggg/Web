@@ -3,8 +3,22 @@ import java.util.*;
 import java.sql.*;
 import com.sist.common.*;
 import com.sist.vo.*;
-
 import oracle.jdbc.OracleTypes;
+/*
+	try{
+		getConnection();
+		insert => commit() => 에러발생 => catch로 이동 (괜찮아)
+		update => commit() => 에러발생 (insert는 수행이 되었으므로, db 에는 반영됨)
+		insert => commit()
+		.. 그래서 각각 commit 시키지 말고 한번에 수행 후 
+			정상수행하면 commit / 하나라도 에러가 발생하면 모두 취소 => rollback(); 
+	} catch(Exception e) {
+		rollback()
+		e.PrintStackTrace();
+	} finally {
+		disConnection();
+	}
+ */
 public class ReplyDAO {
 	private Connection conn;
 	private CallableStatement cs;
