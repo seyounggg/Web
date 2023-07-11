@@ -56,7 +56,14 @@ public class SeoulModel {
 		SeoulDAO dao=SeoulDAO.newInstance();
 		SeoulVO vo=dao.seoulDetailData(Integer.parseInt(no), Integer.parseInt(type));
 		
+		// 주소 자르기
+		String addr=vo.getAddress();
+		String addr1=addr.substring(addr.indexOf(" ")+1);
+		String addr2=addr1.substring(addr1.indexOf(" ")+1);
+		String addr3=addr2.substring(0,addr2.indexOf(" "));
+		
 		// 전송
+		request.setAttribute("addr", addr3.trim()+"맛집");
 		request.setAttribute("vo", vo);
 		request.setAttribute("type", type);
 		request.setAttribute("main_jsp", "../seoul/seoul_detail.jsp");
