@@ -8,4 +8,9 @@
   <bean id="seoul" class="com.sist.model.SeoulModel"/>
   <bean id="reply" class="com.sist.model.ReplyModel"/>
   <bean id="fbreply" class="com.sist.model.FreeBoardReplyModel"/>
+  <bean id="reserve" class="com.sist.model.ReserveModel"/>
+  <bean id="recipe" class="com.sist.model.RecipeModel"/>
+  <!--
+  	Spring => <component-scam:package="com.sist.model"> 패키지 하나만 등록하면 됨
+  -->
 </beans>
