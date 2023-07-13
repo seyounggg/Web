@@ -3,6 +3,8 @@ package com.sist.model;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.sist.controller.RequestMapping;
 import java.util.*;
 import com.sist.dao.*;
@@ -156,7 +158,33 @@ public class FoodModel {
 		String addr2=address.substring(address.indexOf("지번")+3);
 		request.setAttribute("addr1", addr1.trim());
 		request.setAttribute("addr2", addr2.trim());
+		
+		//jjim_count 넘기기!
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			FoodJjimLikeDAO jdao=FoodJjimLikeDAO.newInstance();
+			int jjim_count=jdao.foodJjimCount(id, Integer.parseInt(fno));
+			request.setAttribute("jjim_count", jjim_count);
+			
+			//food_like 처리
+			int like_count=jdao.foodLikeOk(Integer.parseInt(fno), id);
+			int like_total=jdao.foodLikeCount(Integer.parseInt(fno));
+			request.setAttribute("like_count", like_count);
+			request.setAttribute("like_total", like_total);
+		}
+		
 		// 인근 명소 또는 레시피
+		String type=vo.getType();
+		int num=type.indexOf("/"); // 소바/라멘/우동 처럼 "/" 여부 확인
+		if(num>=0) {
+			type=type.replace("/", "|");
+		} else {
+			type=type.substring(0,type.indexOf(" "));
+		}
+		List<RecipeVO> relist=dao.foodRecipeData(type);
+		
+		request.setAttribute("relist", relist);
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
 		CommonModel.commonRequestData(request);
 		

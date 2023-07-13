@@ -5,10 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.topmenu li{
+	display: flex;
+}
+</style>
 </head>
 <body>
 <div class="wrap">
-	<main>
+  <main>
 	<section id="vert-nav">
       <h3>마이페이지</h3>
        <nav role='navigation'>
@@ -21,11 +26,11 @@
           <li><a href="../mypage/mypage_reserve.do"><i class="entypo-vcard"></i>맛집예약</a></li>
           <li><a href="#0"><i class="entypo-vcard"></i>장바구니</a></li>
           <li><a href="#0"><i class="entypo-vcard"></i>구매내역</a></li>
-		  <li><a href="#0"><i class="entypo-vcard"></i>찜목록</a></li>
+		  <li><a href="../mypage/mypage_jjim_list.do"><i class="entypo-vcard"></i>찜목록</a></li>
         </ul>
-      </nav>  
+      </nav>
     </section>
-	</main>
+  </main>
 </div>
 
 </body>

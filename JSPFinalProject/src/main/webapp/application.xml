@@ -12,6 +12,7 @@
   <bean id="recipe" class="com.sist.model.RecipeModel"/>
   <bean id="mypage" class="com.sist.model.MyPageModel"/>
   <bean id="admin" class="com.sist.model.AdminPageModel"/>
+  <bean id="jjimlike" class="com.sist.model.FoodJjimLikeModel"/>
   <!--
   	Spring => <component-scam:package="com.sist.model"> 패키지 하나만 등록하면 됨
   -->

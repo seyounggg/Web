@@ -27,7 +27,7 @@
       <div class="col-sm-4">
         <jsp:include page="../mypage/mypage_nav.jsp"></jsp:include>
       </div>
-      <div class="col-sm-7" style="margin-left: 10px">
+      <div class="col-sm-8">
         <%-- 변경 위치 --%>
           <jsp:include page="${mypage_jsp }"></jsp:include>
       </div>

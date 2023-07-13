@@ -35,7 +35,8 @@
                     </a>
                   </td>
                   <td width=65%>
-                    <a href="../food/food_detail_before.do?fno=${vo.fno }"><h3>${vo.name }</a>&nbsp;<span style="color: orange">${vo.score }</span></h3>
+                    <a href="../food/food_detail_before.do?fno=${vo.fno }">
+                    <h3>${vo.name }</a>&nbsp;<span style="color: orange">${vo.score }</span></h3>
                   </td>
                 </tr>
                 <tr>
