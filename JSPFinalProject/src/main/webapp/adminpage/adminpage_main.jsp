@@ -24,10 +24,10 @@
 <div class="wrapper row3">
   <main class="container clear">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <jsp:include page="../adminpage/adminpage_nav.jsp"></jsp:include>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <%-- 변경 위치 --%>
           <jsp:include page="${adminpage_jsp }"></jsp:include>
       </div>
