@@ -12,9 +12,10 @@ package com.sist.vo;
  REGDATE                                            DATE
  */
 import java.util.*;
-public class ReserveInfoVO {
+public class ReserveVO {
 	private int no,fno;
-	private String id,rday,rtime,inwon,rok,dbday;
+	private String id,rday,rtime,inwon,rok,dbday,poster,name,phone;
+	// poster,name,phone,dbday => subQuery => function
 	private Date regdate;
 	public int getNo() {
 		return no;
@@ -64,11 +65,31 @@ public class ReserveInfoVO {
 	public void setDbday(String dbday) {
 		this.dbday = dbday;
 	}
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public Date getRegdate() {
 		return regdate;
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
+	
 	
 }

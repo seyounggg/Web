@@ -10,6 +10,8 @@
   <bean id="fbreply" class="com.sist.model.FreeBoardReplyModel"/>
   <bean id="reserve" class="com.sist.model.ReserveModel"/>
   <bean id="recipe" class="com.sist.model.RecipeModel"/>
+  <bean id="mypage" class="com.sist.model.MyPageModel"/>
+  <bean id="admin" class="com.sist.model.AdminPageModel"/>
   <!--
   	Spring => <component-scam:package="com.sist.model"> 패키지 하나만 등록하면 됨
   -->
