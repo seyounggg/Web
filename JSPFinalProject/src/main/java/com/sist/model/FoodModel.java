@@ -182,9 +182,9 @@ public class FoodModel {
 		} else {
 			type=type.substring(0,type.indexOf(" "));
 		}
-		List<RecipeVO> relist=dao.foodRecipeData(type);
+		List<RecipeVO> reList=dao.foodRecipeData(type);
 		
-		request.setAttribute("relist", relist);
+		request.setAttribute("reList", reList);
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
 		CommonModel.commonRequestData(request);
 		
