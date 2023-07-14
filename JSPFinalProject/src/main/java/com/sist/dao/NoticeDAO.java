@@ -100,4 +100,93 @@ public class NoticeDAO {
 		}
 		return vo;
 	}
+	
+	// IN,OUT 입출력 오류 => ? 갯수와 입력되는 값의 갯수가 맞지 않을 경우
+	// null => URL을 의심! => server.xml을 확인
+	// 실행을 했는데, 오류는 보이지 않고 데이터가 안들어오는 경우
+	/*
+		1) 오라클에 commit이 안된 경우
+		2) application에 등록이 안된경우도 있음!
+	*/
+	// 관리자
+	// 목록 => 제작
+	// 추가 (no,id,name,type,subject,content,regdate,hit)
+	public void noticeInsert(NoticeVO vo) {
+		try {
+			conn=db.getConnection();
+			String sql="INSERT INTO project_notice VALUES("
+					+ "pn_no_seq.nextval,?,?,?,?,?,SYSDATE,0)";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getId());
+			ps.setString(2, vo.getName());
+			ps.setInt(3, vo.getType());
+			ps.setString(4, vo.getSubject());
+			ps.setString(5, vo.getContent());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
+	// 삭제
+	public void noticeDelete(int no) {
+		try {
+			conn=db.getConnection();
+			String sql="DELETE FROM project_notice WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
+	// 수정(수정화면 보여주기)
+	public NoticeVO noticeUpdateData(int no) {
+		NoticeVO vo=new NoticeVO();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT no,type,subject,content "
+					+ "FROM project_notice "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setType(rs.getInt(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return vo;
+	}
+	
+	// 수정하기
+	public void noticeUpdate(NoticeVO vo) {
+		try {
+			conn=db.getConnection();
+			String sql="UPDATE project_notice SET "
+					+ "type=?, subject=?, content=? "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, vo.getType());
+			ps.setString(2, vo.getSubject());
+			ps.setString(3, vo.getContent());
+			ps.setInt(4, vo.getNo());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
+	
 }
