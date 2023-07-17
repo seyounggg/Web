@@ -140,4 +140,142 @@ public class MemberModel {
 			
 		return "redirect:../main/main.do";
 	}
+	
+	@RequestMapping("member/idfind.do")
+	public String memberIdFind(HttpServletRequest request,HttpServletResponse response) {
+		
+		request.setAttribute("main_jsp", "../member/idfind.jsp");
+		CommonModel.commonRequestData(request);
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/idfind_ok.do")
+	public void memberIdFindOk(HttpServletRequest request,HttpServletResponse response) {
+		String email=request.getParameter("email");
+		
+		//dao 연동
+		MemberDAO dao=MemberDAO.newInstance();
+		String res=dao.memberId_EmailFind(email);
+		try {
+			// ajax에 값을 전송 => NO , s***
+			PrintWriter out=response.getWriter(); //사용자 브라우저
+			out.println(res);
+		}catch(Exception e) {}
+	}
+	
+	@RequestMapping("member/passwordfind.do")
+	public String memeberPasswordFind(HttpServletRequest request,HttpServletResponse response) {
+		
+		request.setAttribute("main_jsp", "../member/passwordfind.jsp");
+		CommonModel.commonRequestData(request);
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/passwordfind_ok.do")
+	public void memberPasswordFindOk(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (Exception e) {}
+		String name=request.getParameter("name");
+		String email=request.getParameter("email");
+		
+		MemberDAO dao=MemberDAO.newInstance();
+		// 결과값 받기
+		String res=dao.memberPassword_EmailFind(name, email);
+		// Ajax로 전송
+		try {
+			PrintWriter out=response.getWriter();
+			out.println(res);
+		} catch (Exception e) {}
+	}
+	
+	@RequestMapping("member/member_update.do")
+	public String memberUpdate(HttpServletRequest request,HttpServletResponse response) {
+		// 이미 등록되어있는 개인정보를 보내줘야 한다 => id만 있으면 됨(구분자)
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		//dao연동
+		MemberDAO dao=MemberDAO.newInstance();
+		MemberVO vo=dao.memberUpdateData(id);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../member/member_update.jsp");
+		CommonModel.commonRequestData(request);
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_update_ok.do")
+	public String memberUpdateOk(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		String pwd=request.getParameter("pwd");
+		String name=request.getParameter("name");
+		String sex=request.getParameter("sex");
+		String birthday=request.getParameter("birthday");
+		String email=request.getParameter("email");
+		String post=request.getParameter("post");
+		String addr1=request.getParameter("addr1");
+		String addr2=request.getParameter("addr2");
+		String phone1=request.getParameter("phone1");
+		String phone=request.getParameter("phone");
+		String content=request.getParameter("content");
+		
+		MemberVO vo=new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setName(name);
+		vo.setSex(sex);
+		vo.setBirthday(birthday);
+		vo.setEmail(email);
+		vo.setPost(post);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setPhone(phone1+"-"+phone);
+		vo.setContent(content);
+		
+		//dao연결
+		MemberDAO dao=MemberDAO.newInstance();
+		MemberVO mvo=dao.memberUpdate(vo);
+		if(mvo.getMsg().equals("YES")) {
+			session=request.getSession();
+			session.setAttribute("name", mvo.getName());
+		}
+		request.setAttribute("mvo", mvo);
+		return "../member/member_update_ok.jsp";
+	}
+	
+	@RequestMapping("member/member_delete.do")
+	public String memberDelete(HttpServletRequest request,HttpServletResponse response) {
+		
+		request.setAttribute("main_jsp", "../member/member_delete.jsp");
+		CommonModel.commonRequestData(request);
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/member_delete_ok.do")
+	public void memberDeleteOk(HttpServletRequest request,HttpServletResponse response) {
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		// db연동
+		MemberDAO dao=MemberDAO.newInstance();
+		String res=dao.memberDeleteOk(id, pwd);
+		
+		if(res.equals("YES")) {
+			session.invalidate(); // 세션해제
+		}
+		// 결과값 전송 -> jsp역할을 수행(ajax로 전달)
+		try {
+			PrintWriter out=response.getWriter();
+			out.println(res);
+		} catch (Exception e) {}
+	}
 }
