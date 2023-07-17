@@ -391,7 +391,13 @@ public class MemberDAO {
 					ps=conn.prepareStatement(sql);
 					ps.setString(1, id);
 					ps.executeUpdate();
-						
+					
+					sql="DELETE FROM reply_all "
+						+ "WHERE id=?";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ps.executeUpdate();
+					
 					sql="DELETE FROM project_member "
 						+ "WHERE id=?";
 					ps=conn.prepareStatement(sql);
