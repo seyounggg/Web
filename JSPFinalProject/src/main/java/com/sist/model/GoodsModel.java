@@ -66,6 +66,11 @@ public class GoodsModel {
 		GoodsDAO dao=GoodsDAO.newInstance();
 		// 결과값을 reqeust로 묶어서 전송 => goods_detail.jsp
 		GoodsVO vo=dao.goodsDetailData(Integer.parseInt(no), Integer.parseInt(type));
+		
+		String price=vo.getGoods_price();
+		int p=Integer.parseInt(price.replaceAll("[^0-9]", ""));
+		
+		request.setAttribute("price", p);
 		request.setAttribute("no", no);
 		request.setAttribute("type", type);
 		request.setAttribute("vo", vo);
